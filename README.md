@@ -51,11 +51,29 @@ Pour chaque exercice :
 - [ ] 1.2 Implémenter le debounce sur la recherche
 - [ ] 1.3 Documenter votre solution ici
 
-_Votre réponse pour l'exercice 1 :_
-```
-Expliquez votre solution ici
-[Ajoutez vos captures d'écran]
-```
+#### Réponse :
+
+ [ ] 1.1 Modifier le composant ProductSearch pour utiliser la recherche
+![1](captures/search.png)
+
+- [ ] 1.2 Implémenter le debounce sur la recherche
+![2](captures/Debounce.png)
+
+- [ ] 1.3 Documenter votre solution ici
+
+-  - Connexion à la recherche :
+Le composant ProductSearch prend en props searchTerm et setSearchTerm, ce qui permet d’envoyer le terme de recherche vers le parent. Le composant ProductList utilise ce searchTerm pour filtrer les produits à afficher.
+
+   - Débounce :
+Nous avons ajouté un useEffect dans ProductSearch qui utilise setTimeout pour différer la mise à jour de searchTerm. Cela permet d’attendre 1 seconde après la dernière frappe de l’utilisateur avant de déclencher la recherche. Ce mécanisme de "debounce" améliore l’expérience utilisateur et les performances, notamment lorsqu’on interagit avec une API ou un grand nombre de produits.
+
+   - Résultat :
+Lorsque l’utilisateur saisit une recherche :
+      - La mise à jour du champ se fait immédiatement via debouncedSearchTerm.
+      - Après 1 seconde d’inactivité, setSearchTerm est appelé.
+      - Le composant ProductList filtre les produits à afficher en fonction de ce terme.
+
+
 
 ### Exercice 2 : Context et Internationalisation
 #### Objectif : Gérer les préférences de langue
