@@ -82,11 +82,25 @@ Lorsque l’utilisateur saisit une recherche :
 - [ ] 2.2 Ajouter le sélecteur de langue
 - [ ] 2.3 Documenter votre solution ici
 
-_Votre réponse pour l'exercice 2 :_
-```
-Expliquez votre solution ici
-[Ajoutez vos captures d'écran]
-```
+#### Réponse :
+
+- [ ] 2.1 Créer le LanguageContext
+
+Nous avons créé un contexte React LanguageContext pour stocker la langue choisie (fr ou en). Ce contexte contient la variable language ainsi qu’un setter setLanguage, et est exposé à l’ensemble de l’application via un LanguageContext.Provider dans App.js.
+
+- [ ] 2.2 Ajouter le sélecteur de langue
+
+- le site en français
+
+![2](captures/version_français.png)
+
+- le site en anglais
+![2](captures/version_anglais.png)
+
+- [ ] 2.3 Documenter votre solution ici
+
+Nous avons implémenté un composant LanguageSelector avec une liste déroulante permettant de sélectionner la langue. Lorsqu’une langue est choisie, elle est mise à jour dans le contexte. Tous les composants enfants peuvent ensuite accéder à cette valeur via useContext(LanguageContext).
+
 
 ### Exercice 3 : Hooks Personnalisés
 #### Objectif : Créer des hooks réutilisables
