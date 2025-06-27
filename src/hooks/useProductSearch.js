@@ -1,7 +1,4 @@
-import { useState, useEffect } from 'react';
-
-// TODO: Exercice 3.1 - Créer le hook useDebounce
-
+import { useState, useEffect, useCallback } from 'react';
 
 export const useDebounce = (value, delay) => {
   const [debouncedValue, setDebouncedValue] = useState(value);
@@ -11,14 +8,12 @@ export const useDebounce = (value, delay) => {
       setDebouncedValue(value);
     }, delay);
 
-    return () => clearTimeout(timer); 
+    return () => clearTimeout(timer);
   }, [value, delay]);
 
   return debouncedValue;
 };
 
-
-// TODO: Exercice 3.2 - Créer le hook useLocalStorage
 
 export const useLocalStorage = (key, initialValue) => {
   const [storedValue, setStoredValue] = useState(() => {
@@ -42,39 +37,60 @@ export const useLocalStorage = (key, initialValue) => {
   return [storedValue, setStoredValue];
 };
 
+
 const useProductSearch = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  // TODO: Exercice 4.2 - Ajouter l'état pour la pagination
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const productsPerPage = 9;
+
+
+  const fetchProducts = useCallback(async (page = currentPage) => {
+    setLoading(true);
+    try {
+      const response = await fetch(`https://api.daaif.net/products?delay=1000&skip=${page}&limit=${productsPerPage}`);
+      if (!response.ok) throw new Error('Erreur réseau');
+      const data = await response.json();
+
+      setProducts(data.products);
+      setTotalPages(Math.ceil(data.total / productsPerPage));
+      setError(null);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  }, [currentPage, productsPerPage]);
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        // TODO: Exercice 4.2 - Modifier l'URL pour inclure les paramètres de pagination
-        const response = await fetch('https://api.daaif.net/products?delay=1000');
-        if (!response.ok) throw new Error('Erreur réseau');
-        const data = await response.json();
-        setProducts(data.products);
-        setLoading(false);
-      } catch (err) {
-        setError(err.message);
-        setLoading(false);
-      }
-    };
+    fetchProducts(currentPage);
+  }, [currentPage, fetchProducts]);
 
-    fetchProducts();
-  }, []); // TODO: Exercice 4.2 - Ajouter les dépendances pour la pagination
+  const reloadProducts = () => {
+    fetchProducts(currentPage);
+  };
 
-  // TODO: Exercice 4.1 - Ajouter la fonction de rechargement
-  // TODO: Exercice 4.2 - Ajouter les fonctions pour la pagination
 
-  return { 
-    products, 
-    loading, 
+  const nextPage = () => {
+    if (currentPage < totalPages) setCurrentPage((prev) => prev + 1);
+  };
+
+  const previousPage = () => {
+    if (currentPage > 1) setCurrentPage((prev) => prev - 1);
+  };
+
+  return {
+    products,
+    loading,
     error,
-    // TODO: Exercice 4.1 - Retourner la fonction de rechargement
-    // TODO: Exercice 4.2 - Retourner les fonctions et états de pagination
+    reloadProducts,
+    currentPage,
+    totalPages,
+    nextPage,
+    previousPage,
   };
 };
 

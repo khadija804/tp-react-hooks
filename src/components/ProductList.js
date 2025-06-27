@@ -12,12 +12,15 @@ const ProductList = ({ searchTerm }) => {
     en: "Price: ",
   };
   const { language } = useContext(LanguageContext);
-  const { 
-    products, 
-    loading, 
+  const {
+    products,
+    loading,
     error,
-    // TODO: Exercice 4.1 - Récupérer la fonction de rechargement
-    // TODO: Exercice 4.2 - Récupérer les fonctions et états de pagination
+    reloadProducts,
+    currentPage,
+    totalPages,
+    nextPage,
+    previousPage
   } = useProductSearch();
   
   const searchProducts = products.filter((product) =>
@@ -41,6 +44,12 @@ const ProductList = ({ searchTerm }) => {
   return (
     <div>
       {/* TODO: Exercice 4.1 - Ajouter le bouton de rechargement */}
+      <div className="d-flex justify-content-end mb-3">
+        <button className="btn btn-secondary" onClick={reloadProducts}>
+         Recharger
+        </button>
+      </div>
+
       <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
         {searchProducts.map(product => (
           <div key={product.id} className="col">
@@ -88,6 +97,26 @@ const ProductList = ({ searchTerm }) => {
         </ul>
       </nav>
       */}
+      <nav className="mt-4">
+        <ul className="pagination justify-content-center">
+          <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
+            <button className="page-link" onClick={previousPage}>
+              Précédent
+            </button>
+          </li>
+          <li className="page-item">
+            <span className="page-link">
+              Page {currentPage} sur {totalPages}
+            </span>
+          </li>
+          <li className={`page-item ${currentPage === totalPages ? 'disabled' : ''}`}>
+            <button className="page-link" onClick={nextPage}>
+              Suivant
+            </button>
+          </li>
+        </ul>
+      </nav>
+
     </div>
   );
 };

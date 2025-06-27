@@ -138,11 +138,21 @@ Version française avec prise en charge du stockage local
 - [ ] 4.2 Implémenter la pagination
 - [ ] 4.3 Documenter votre solution ici
 
-_Votre réponse pour l'exercice 4 :_
-```
-Expliquez votre solution ici
-[Ajoutez vos captures d'écran]
-```
+#### Réponse :
+- [ ] 4.1 Ajouter le bouton de rechargement
+
+![8](captures/recharger.png)
+
+- [ ] 4.2 Implémenter la pagination
+
+Premiere page
+![9](captures/page1.png)
+
+Deuxiéme page
+
+![10](captures/pageSuivante.png)
+
+
 
 ## Rendu
 
