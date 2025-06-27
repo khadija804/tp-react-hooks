@@ -92,10 +92,10 @@ Nous avons créé un contexte React LanguageContext pour stocker la langue chois
 
 - le site en français
 
-![2](captures/version_français.png)
+![3](captures/version_français.png)
 
 - le site en anglais
-![2](captures/version_anglais.png)
+![4](captures/version_anglais.png)
 
 - [ ] 2.3 Documenter votre solution ici
 
@@ -109,11 +109,27 @@ Nous avons implémenté un composant LanguageSelector avec une liste déroulante
 - [ ] 3.2 Créer le hook useLocalStorage
 - [ ] 3.3 Documenter votre solution ici
 
-_Votre réponse pour l'exercice 3 :_
-```
-Expliquez votre solution ici
-[Ajoutez vos captures d'écran]
-```
+#### Réponse :
+
+- [ ] 3.1 Créer le hook useDebounce
+
+![5](captures/userDebounce.png)
+
+- [ ] 3.2 Créer le hook useLocalStorage
+
+![6](captures/userProductSearch.png)
+
+
+- [ ] 3.3 Documenter votre solution 
+
+Version anglaise avec prise en charge du stockage local
+
+![7](captures/saveFR.png)
+
+Version française avec prise en charge du stockage local
+
+![8](captures/saveENG.png)
+
 
 ### Exercice 4 : Gestion Asynchrone et Pagination
 #### Objectif : Gérer le chargement et la pagination
